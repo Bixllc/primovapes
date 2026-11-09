@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+:root,[data-theme="dark"]{--bg:#0A090B;--surface:#141215;--surface2:#1D1A1F;--ink:#F5F1F4;--muted:#A79FA9;--line:#2A2530;--edge:rgba(255,46,147,.35);--pink:#FF2E93;--on-pink:#FFFFFF;--bar:#3A0A24}
+[data-theme="light"]{--bg:#F6F3F2;--surface:#FFFFFF;--surface2:#EEE9E8;--ink:#161317;--muted:#5F5A61;--line:#E2DCDA;--edge:rgba(211,22,109,.3);--pink:#D3166D;--on-pink:#FFFFFF;--bar:#D3166D}
+html,body{margin:0;background:var(--bg)}
+*{box-sizing:border-box}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--ink)}
+::-webkit-scrollbar{height:0;width:0}
+@keyframes primoPuff{0%{transform:translate(-50%,-50%) scale(.35);opacity:0}18%{opacity:var(--o)}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(2.4) rotate(var(--r));opacity:0}}
+@keyframes primoNeon{0%,100%{filter:drop-shadow(0 0 0 rgba(255,60,160,0))}50%{filter:drop-shadow(0 0 6px rgba(255,60,160,.55)) drop-shadow(0 0 10px rgba(80,220,230,.25))}92%{filter:drop-shadow(0 0 4px rgba(255,60,160,.4))}94%{filter:drop-shadow(0 0 0 rgba(255,60,160,0))}96%{filter:drop-shadow(0 0 7px rgba(255,60,160,.6))}}
+@media (prefers-reduced-motion:reduce){[data-puff]{display:none}[data-neon]{animation:none!important}}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="background:var(--bg);color:var(--ink);font-family:'Google Sans',system-ui,sans-serif;min-height:100vh">
+
+<div style="background:var(--bar);color:#FFFFFF;font-size:12px;font-weight:500;letter-spacing:.03em;text-transform:uppercase">
+  <div style="max-width:1400px;margin:0 auto;padding:9px 28px;display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap">
+    <div style="display:flex;gap:22px;flex-wrap:wrap">
+      <span>Free shipping on orders $75+</span><span style="opacity:.4">|</span><span>Same-day local pickup</span><span style="opacity:.4">|</span><span>100% authentic products</span><span style="opacity:.4">|</span><span>21+ only</span>
+    </div>
+    <div style="display:flex;gap:16px;text-transform:none;font-size:13px"><a href="#" style="color:#FFFFFF">Track Order</a><span style="opacity:.4">|</span><a href="#" style="color:#FFFFFF">Contact</a></div>
+  </div>
+</div>
+
+<section style="position:relative;overflow:hidden;background:#0A090B;color:#F5F1F4;min-height:clamp(520px,48vw,720px);display:flex;flex-direction:column">
+  <img src="assets/hero-night.png" alt="Fume disposable, Backwoods and Bob Marley papers on a marble table in a neon lounge" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 50%">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,11,.92) 0%,rgba(10,9,11,.7) 34%,rgba(10,9,11,0) 60%),linear-gradient(180deg,rgba(10,9,11,.55) 0%,rgba(10,9,11,0) 22%,rgba(10,9,11,0) 75%,rgba(10,9,11,.9) 100%);pointer-events:none"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:240px;background:linear-gradient(180deg,rgba(10,9,11,.92) 0%,rgba(10,9,11,.75) 50%,rgba(10,9,11,0) 100%);pointer-events:none;z-index:1"></div>
+  <header style="position:relative;z-index:2;max-width:1400px;width:100%;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:36px">
+    <div style="width:120px;height:120px;flex:none">{{ headerLogo }}</div>
+    <nav style="display:flex;gap:6px;overflow-x:auto;font-size:14px;font-weight:500;flex:1;min-width:0">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="10">
+        <a href="#shop" style="color:{{ n.color }};padding:10px 10px;white-space:nowrap;border-bottom:2px solid {{ n.border }}" style-hover="color:#FF2E93">{{ n.name }}</a>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button aria-label="Search" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:#F5F1F4;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+      <button aria-label="Account" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:#F5F1F4;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg></button>
+      <button aria-label="Cart" onClick="{{ openCart }}" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:#F5F1F4;font:inherit;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7z"></path><path d="M9 10V6a3 3 0 0 1 6 0v4"></path></svg><span style="position:absolute;top:2px;right:0;min-width:18px;height:18px;border-radius:999px;background:#FF2E93;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;padding:0 5px">{{ cartCount }}</span></button>
+    </div>
+  </header>
+  <div style="position:relative;z-index:1;flex:1;width:100%;max-width:1400px;margin:0 auto;padding:24px 28px 72px;display:flex;flex-direction:column;justify-content:center;gap:24px">
+    <div style="font-size:13px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:#CFC6CF">Premium products. Good vibes.</div>
+    <h1 style="font-weight:700;letter-spacing:-.03em;font-size:clamp(48px,6vw,96px);line-height:.95;margin:0;text-transform:uppercase;max-width:11ch">More than a shop, <span style="color:#FF2E93;text-shadow:0 0 28px rgba(255,46,147,.45)">it's a vibe.</span></h1>
+    <p style="font-size:18px;line-height:1.55;color:#DCD4DB;margin:0;max-width:26em;text-wrap:pretty">Vapes, exotics, hookah, glass, munchies and more. Everything you need, all in one place.</p>
+    <div style="display:flex">
+      <a href="#shop" style="background:#FF2E93;color:#FFFFFF;height:56px;padding:0 34px;border-radius:999px;display:flex;align-items:center;font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 0 32px rgba(255,46,147,.45)" style-hover="background:#FFFFFF;color:#0A090B">Shop now →</a>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1400px;margin:0 auto;padding:40px 28px 0">
+  <h2 style="font-weight:700;letter-spacing:-.03em;font-size:48px;line-height:1;margin:0 0 20px;text-transform:uppercase">Shop by <span style="color:var(--pink)">category</span></h2>
+  <div style="display:flex;flex-wrap:nowrap;gap:12px;overflow-x:auto">
+    <sc-for list="{{ categories }}" as="c" hint-placeholder-count="8">
+      <a href="#shop" onClick="{{ c.pick }}" style="position:relative;display:block;flex:1 1 0;min-width:130px;aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--edge);background:var(--surface2);color:#FFFFFF" style-hover="border-color:var(--pink);box-shadow:0 0 18px rgba(255,46,147,.3)">
+        <image-slot id="v2-cat-{{ c.key }}" shape="rect" src="{{ c.src }}" placeholder="{{ c.name }} photo"></image-slot>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:28px 12px 12px;background:linear-gradient(180deg,rgba(10,9,11,0),rgba(10,9,11,.88));display:flex;justify-content:space-between;align-items:center;pointer-events:none">
+          <span style="font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.02em">{{ c.name }}</span>
+          <span style="width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:13px">→</span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1400px;margin:0 auto;padding:28px 28px 0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <sc-for list="{{ perks }}" as="pk" hint-placeholder-count="5">
+      <div style="display:flex;align-items:center;gap:14px;padding:20px 18px">
+        <span style="width:36px;height:36px;border-radius:50%;border:2px solid var(--pink);flex:none;display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:var(--pink)"></span></span>
+        <div><div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.03em">{{ pk.t }}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">{{ pk.s }}</div></div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="shop" style="max-width:1400px;margin:0 auto;padding:48px 28px 0">
+  <div style="display:flex;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:20px">
+    <h2 style="font-weight:700;letter-spacing:-.03em;font-size:48px;line-height:1;margin:0;text-transform:uppercase">Primo <span style="color:var(--pink)">picks</span></h2>
+    <a href="#shop" style="margin-left:auto;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px;margin-bottom:6px">View all products →</a>
+  </div>
+  <div style="position:relative">
+    <div ref="{{ railRef }}" style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,calc((100% - 64px) / 5));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:4px">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+        <div style="scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px">
+          <div style="position:relative;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:var(--surface2)">
+            <image-slot id="v2-prod-{{ p.id }}" shape="rect" fit="{{ p.fit }}" src="{{ p.src }}" placeholder="{{ p.name }}"></image-slot>
+            <button onClick="{{ p.like }}" aria-label="Save" style="position:absolute;top:6px;right:6px;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:{{ p.heartColor }};font-size:20px;cursor:pointer">{{ p.heart }}</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:0 2px">
+            <div style="font-weight:600;font-size:15px">{{ p.name }}</div>
+            <div style="display:flex;gap:6px;align-items:center;font-size:12px"><span style="color:#F5B81C;letter-spacing:.05em">{{ p.stars }}</span><span style="color:var(--muted)">({{ p.reviews }})</span></div>
+            <div style="font-weight:700;font-size:18px">{{ p.priceStr }}</div>
+          </div>
+          <button onClick="{{ p.add }}" style="height:42px;border-radius:8px;border:0;background:{{ p.btnBg }};color:{{ p.btnColor }};font:inherit;font-size:14px;font-weight:600;cursor:pointer">{{ p.btnLabel }}</button>
+        </div>
+      </sc-for>
+    </div>
+    <button onClick="{{ scrollRail }}" aria-label="Next" style="position:absolute;right:-18px;top:40%;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.4)">→</button>
+  </div>
+</section>
+
+<section style="max-width:1400px;margin:0 auto;padding:40px 28px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:16px">
+  <div style="position:relative;border-radius:10px;overflow:hidden;min-height:260px;border:1px solid rgba(255,46,147,.5);background:#120B10;color:#FFFFFF">
+    <image-slot id="v2-promo-flower" shape="rect" src="assets/promo-exotic-flower.png" position="75% 35%" placeholder="Flower jar — neon pink lighting"></image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,11,.85) 0%,rgba(10,9,11,.4) 50%,rgba(10,9,11,0) 75%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0;padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;pointer-events:none">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#FF2E93">Top shelf</div>
+      <h3 style="font-weight:700;letter-spacing:-.03em;font-size:44px;line-height:.95;margin:0;text-transform:uppercase">Exotic<br><span style="color:#FF2E93">THCa flower</span></h3>
+      <div style="font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase">Fresh drops. Premium quality.</div>
+      <a href="#shop" style="pointer-events:auto;align-self:start;margin-top:6px;background:#FF2E93;color:#FFFFFF;height:44px;padding:0 24px;border-radius:999px;display:flex;align-items:center;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em">Shop flower →</a>
+    </div>
+  </div>
+  <div style="position:relative;border-radius:10px;overflow:hidden;min-height:260px;border:1px solid rgba(255,46,147,.5);background:#0B0D14;color:#FFFFFF">
+    <image-slot id="v2-promo-vapes" shape="rect" src="assets/promo-vapes.png" position="75% 40%" placeholder="Disposables lineup — blue/pink smoke"></image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,11,.85) 0%,rgba(10,9,11,.4) 50%,rgba(10,9,11,0) 75%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0;padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;pointer-events:none">
+      <h3 style="font-weight:700;letter-spacing:-.03em;font-size:44px;line-height:.95;margin:0;text-transform:uppercase">Vapes &amp;<br><span style="color:#FF2E93">disposables</span></h3>
+      <div style="font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase">Your favorite brands.</div>
+      <a href="#shop" style="pointer-events:auto;align-self:start;margin-top:6px;background:#FF2E93;color:#FFFFFF;height:44px;padding:0 24px;border-radius:999px;display:flex;align-items:center;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em">Shop vapes →</a>
+    </div>
+  </div>
+</section>
+
+<section id="visit" style="max-width:1400px;margin:0 auto;padding:48px 28px 0">
+  <div style="border-radius:10px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+    <div style="padding:36px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--pink)">Order online, skip the line</div>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF2E93" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7z"></path><path d="M9 10V6a3 3 0 0 1 6 0v4"></path></svg>
+      </div>
+      <h2 style="font-weight:700;letter-spacing:-.03em;font-size:44px;line-height:1;margin:0;text-transform:uppercase">In. Out. Done.</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:28px;font-weight:600;color:var(--pink);line-height:1">01</div><div style="height:3px;background:var(--pink);border-radius:2px"></div><div style="font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Order online</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:28px;font-weight:600;color:var(--pink);line-height:1">02</div><div style="height:3px;background:var(--pink);border-radius:2px"></div><div style="font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase">We prepare</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:28px;font-weight:600;color:var(--pink);line-height:1">03</div><div style="height:3px;background:var(--pink);border-radius:2px"></div><div style="font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Pick it up / Delivery</div></div>
+      </div>
+      <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.55">Bring a valid ID — 21+ only.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:15px;line-height:1.5">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Address</div>Store address<br>City, State ZIP</div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Hours</div>Mon–Sun<br>Store hours</div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#" style="background:var(--pink);color:var(--on-pink);height:48px;padding:0 24px;border-radius:999px;display:flex;align-items:center;font-weight:600;font-size:14px">Get directions</a>
+        <a href="#" style="border:1px solid var(--line);color:var(--ink);height:48px;padding:0 24px;border-radius:999px;display:flex;align-items:center;font-weight:600;font-size:14px">Call the shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="margin-top:64px;border-top:1px solid var(--line);background:var(--surface)">
+  <div style="max-width:1400px;margin:0 auto;padding:48px 28px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="width:96px;height:96px">{{ footerLogo }}</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.5">Primo Vapes &amp; Exotics<br>Smoke shop</div>
+    </div>
+    <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">{{ col.title }}</div>
+        <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4"><a href="#" style="color:var(--ink)" style-hover="color:var(--pink)">{{ l }}</a></sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Deals in your inbox</div>
+      <div style="display:flex;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:5px">
+        <input placeholder="Email" style="flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:14px;padding:0 12px">
+        <button style="height:36px;padding:0 18px;border:0;border-radius:999px;background:var(--pink);color:var(--on-pink);font:inherit;font-weight:600;font-size:13px;cursor:pointer">Join</button>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1400px;margin:0 auto;padding:18px 28px 28px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6">Products are intended for adults 21+. Not for use by minors, pregnant or nursing women. These statements have not been evaluated by the FDA. © 2026 Primo Vapes &amp; Exotics.</div>
+</footer>
+
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeCart }}" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40"></div>
+  <aside style="position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);color:var(--ink);z-index:41;display:flex;flex-direction:column;border-left:1px solid var(--line)">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line)">
+      <span style="font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:-.02em">Your cart</span>
+      <button onClick="{{ closeCart }}" style="width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:18px;cursor:pointer">×</button>
+    </div>
+    <div style="flex:1;overflow:auto;padding:12px 24px;display:flex;flex-direction:column">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}"><div style="color:var(--muted);padding:40px 0;text-align:center">Nothing here yet.</div></sc-if>
+      <sc-for list="{{ cartItems }}" as="ci" hint-placeholder-count="0">
+        <div style="display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-weight:600">{{ ci.name }}</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px">
+              <button onClick="{{ ci.dec }}" style="width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer">−</button>
+              <span>{{ ci.qty }}</span>
+              <button onClick="{{ ci.inc }}" style="width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer">+</button>
+            </div>
+          </div>
+          <div style="font-weight:700">{{ ci.lineStr }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:20px 24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;font-size:16px"><span>Subtotal</span><strong>{{ subtotalStr }}</strong></div>
+      <div style="font-size:13px;color:var(--muted)">{{ shipNote }}</div>
+      <button style="height:52px;border:0;border-radius:999px;background:var(--pink);color:var(--on-pink);font:inherit;font-weight:600;font-size:15px;cursor:pointer">Checkout</button>
+    </div>
+  </aside>
+</sc-if>
+
+<sc-if value="{{ showAge }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;background:rgba(5,4,6,.88);z-index:60;display:flex;align-items:center;justify-content:center;padding:24px">
+    <div style="background:var(--surface);color:var(--ink);border:1px solid var(--edge);border-radius:20px;padding:36px;max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
+      <div style="width:160px;height:160px">{{ ageLogo }}</div>
+      <div style="font-weight:700;font-size:30px;text-transform:uppercase;letter-spacing:-.02em;line-height:1.05">Are you 21 or older?</div>
+      <p style="margin:0;color:var(--muted);font-size:15px;line-height:1.5">You must be of legal age to enter this site.</p>
+      <div style="display:flex;gap:10px;width:100%">
+        <button onClick="{{ ageYes }}" style="flex:1;height:50px;border:0;border-radius:999px;background:var(--pink);color:var(--on-pink);font:inherit;font-weight:600;cursor:pointer">Yes, enter</button>
+        <a href="https://www.google.com" style="flex:1;height:50px;border:1px solid var(--line);border-radius:999px;color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:600">No</a>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;showAgeGate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { cart: {}, liked: {}, cartOpen: false, ageOk: localStorage.getItem('primo-age') === '1' };
+  railRef = React.createRef();
+  P = [
+    { id: 'black-mild-cream', name: 'Black & Mild Cream', price: 8.99, r: 5, n: 143, src: 'assets/prod-black-mild-cream-v2.png', fit: 'cover' },
+    { id: 'backwoods-singles', name: 'Backwoods Singles', price: 2.49, r: 5, n: 176, src: 'assets/prod-backwoods-singles.png', fit: 'cover' },
+    { id: 'fume-extra-mint', name: 'Fume Extra Mint Ice', price: 14.99, r: 5, n: 152, src: 'assets/prod-fume-extra-mint-ice.png', fit: 'cover' },
+    { id: 'dutch-masters-palma', name: 'Dutch Masters Palma 2pk', price: 2.29, r: 4, n: 98, src: 'assets/prod-dutch-masters-palma.png', fit: 'cover' },
+    { id: 'grabba-leaf', name: 'Grabba Leaf Whole-Leaf', price: 4.99, r: 5, n: 121, src: 'assets/prod-grabba-leaf.png', fit: 'cover' },
+    { id: 'thca-flower', name: 'Exotic THCa Flower', price: 44.99, r: 4, n: 92 },
+    { id: 'km-hookah', name: 'Khalil Mamoon Hookah', price: 129.99, r: 4, n: 56 },
+    { id: 'beaker-8', name: '8" Glass Water Pipe', price: 49.99, r: 4, n: 74 },
+    { id: 'raw-papers', name: 'RAW Rolling Papers', price: 2.99, r: 5, n: 311 },
+    { id: 'takis-fuego', name: 'Takis Fuego', price: 3.49, r: 4, n: 207 },
+    { id: 'geek-pulse', name: 'Geek Bar Pulse X', price: 22.99, r: 5, n: 164 },
+    { id: 'backwoods', name: 'Backwoods Honey 5pk', price: 9.99, r: 4, n: 88 }
+  ];
+  money = n => '$' + n.toFixed(2);
+  add = (id, d = 1) => this.setState(s => { const c = { ...s.cart }; c[id] = Math.max(0, (c[id] || 0) + d); if (!c[id]) delete c[id]; return { cart: c }; });
+  logo(size, key) {
+    const h = React.createElement, puffs = [];
+    [{ x: 14, y: 20, c: '255,60,170', dx: -0.18, dy: -0.9 }, { x: 87, y: 30, c: '80,220,230', dx: 0.16, dy: -0.95 }].forEach((s, si) => [0, 1, 2, 3].forEach(i => {
+      const d = size * (0.2 + (i % 2) * 0.06);
+      puffs.push(h('span', { key: si + '-' + i, 'data-puff': '', style: {
+        position: 'absolute', left: s.x + '%', top: s.y + '%', width: d, height: d, borderRadius: '50%', pointerEvents: 'none',
+        background: `radial-gradient(circle, rgba(${s.c},.75) 0%, rgba(${s.c},.25) 45%, rgba(${s.c},0) 70%)`,
+        filter: `blur(${Math.max(2, size * 0.03)}px)`, opacity: 0,
+        '--dx': (s.dx * size * (1 + i * 0.25)) + 'px', '--dy': (s.dy * size * (0.8 + i * 0.15)) + 'px', '--r': (si ? 40 : -40) + 'deg', '--o': 0.8,
+        animation: `primoPuff ${3.6 + i * 0.4}s ease-out ${i * 0.95 + si * 0.5}s infinite` } }));
+    }));
+    return h('div', { key, style: { position: 'relative', width: '100%', height: '100%' } },
+      h('img', { src: 'assets/primo-logo.png', alt: 'Primo Vapes & Exotics', 'data-neon': '', style: { width: '100%', height: '100%', borderRadius: '50%', display: 'block', animation: 'primoNeon 5s ease-in-out infinite' } }), ...puffs);
+  }
+  renderVals() {
+    const s = this.state;
+    const products = this.P.map(p => {
+      const q = s.cart[p.id] || 0, liked = !!s.liked[p.id];
+      return { ...p, fit: p.fit || 'contain', priceStr: this.money(p.price), stars: '★'.repeat(p.r) + '☆'.repeat(5 - p.r), reviews: p.n,
+        heart: liked ? '♥' : '♡', heartColor: liked ? 'var(--pink)' : 'var(--ink)',
+        like: () => this.setState(st => ({ liked: { ...st.liked, [p.id]: !st.liked[p.id] } })),
+        add: () => this.add(p.id), btnLabel: q ? `Added · ${q}` : 'Add to Cart',
+        btnBg: q ? 'var(--ink)' : 'var(--pink)', btnColor: q ? 'var(--bg)' : 'var(--on-pink)' };
+    });
+    const cartItems = this.P.filter(p => s.cart[p.id]).map(p => ({ name: p.name, qty: s.cart[p.id], lineStr: this.money(p.price * s.cart[p.id]), inc: () => this.add(p.id), dec: () => this.add(p.id, -1) }));
+    const subtotal = this.P.reduce((a, p) => a + (s.cart[p.id] || 0) * p.price, 0);
+    return {
+      theme: this.props.theme ?? 'dark',
+      headerLogo: this.logo(120, 'h'), footerLogo: this.logo(96, 'f'), ageLogo: this.logo(160, 'a'),
+      showAge: (this.props.showAgeGate ?? true) && !s.ageOk,
+      ageYes: () => { try { localStorage.setItem('primo-age', '1'); } catch (e) {} this.setState({ ageOk: true }); },
+      navItems: ['Home', 'Vapes', 'THC', 'Hookah', 'Glass', 'Roll', 'Munchies', 'Drinks', 'Accessories', 'Brands', 'Deals'].map((n, i) => ({ name: n, color: i ? '#F5F1F4' : '#FF2E93', border: i ? 'transparent' : '#FF2E93' })),
+      categories: ['Vapes', 'THC', 'Hemp', 'Sexual Health', 'Tobacco', 'Accessories'].map(n => ({ key: n.toLowerCase().replace(/\s+/g, '-'), name: n, src: ({ Vapes: 'assets/cat-vapes.png', THC: 'assets/cat-thc.png', Hemp: 'assets/cat-hemp.png', Tobacco: 'assets/cat-tobacco.png', 'Sexual Health': 'assets/cat-sexual-health.png', Accessories: 'assets/cat-accessories.png' })[n] || '' })),
+      perks: [{ t: 'Fast shipping', s: 'Orders $75+' }, { t: 'Local pickup', s: 'Same day' }, { t: 'Authentic products', s: 'Top brands only' }, { t: 'Exclusive deals', s: 'Weekly drops' }, { t: 'Discreet packaging', s: 'Always private' }],
+      products: products.slice(0, 5), railRef: this.railRef,
+      scrollRail: () => { const el = this.railRef.current; if (el) el.scrollBy({ left: el.clientWidth * 0.5, behavior: 'smooth' }); },
+      brands: ['RAZ', 'Elf Bar', 'Lost Mary', 'Stiiizy', 'Cookies', 'RAW', 'Zig-Zag', 'Puffco'].map(n => ({ name: n, key: n.toLowerCase().replace(/[^a-z]/g, '') })),
+      footerCols: [{ title: 'Shop', links: ['Vapes', 'THC', 'Hookah', 'Glass', 'Deals'] }, { title: 'Help', links: ['Track order', 'Shipping', 'Returns', 'Contact'] }, { title: 'Store', links: ['Hours & location', 'Instagram', 'Age policy'] }],
+      cartCount: Object.values(s.cart).reduce((a, b) => a + b, 0),
+      cartOpen: s.cartOpen, openCart: () => this.setState({ cartOpen: true }), closeCart: () => this.setState({ cartOpen: false }),
+      cartItems, cartEmpty: !cartItems.length, subtotalStr: this.money(subtotal),
+      shipNote: subtotal >= 75 ? 'You qualify for free shipping.' : `Add ${this.money(75 - subtotal)} more for free shipping — or pick up free today.`
+    };
+  }
+}
+</script>
+</body>
+</html>
