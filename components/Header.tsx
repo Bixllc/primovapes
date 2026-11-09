@@ -7,18 +7,33 @@ import { AccountIcon, BagIcon, SearchIcon } from "./Icons";
 import { useCart } from "./CartProvider";
 import { navItems } from "@/lib/data";
 
-export default function Header({ solid = false }: { solid?: boolean }) {
+function isActive(href: string, pathname: string) {
+  if (href === "/#shop") return pathname === "/" || pathname.startsWith("/shop");
+  return pathname === href;
+}
+
+/**
+ * Shared site header. `overHero` = homepage variant (120px logo, sits on the
+ * hero photo); otherwise the inner-page variant (84px logo, bottom border).
+ */
+export default function Header({ overHero = false }: { overHero?: boolean }) {
   const pathname = usePathname();
   const { count, open } = useCart();
+  const logoSize = overHero ? 120 : 84;
 
   return (
-    <header className={`header container${solid ? " header--solid" : ""}`}>
-      <Link href="/" className="header-logo" aria-label="Primo Vapes & Exotics — home">
-        <AnimatedLogo size={120} priority />
+    <header className={`header container${overHero ? "" : " header--solid"}`}>
+      <Link
+        href="/"
+        className="header-logo"
+        style={{ width: logoSize, height: logoSize }}
+        aria-label="Primo Vapes & Exotics — home"
+      >
+        <AnimatedLogo size={logoSize} priority />
       </Link>
-      <nav className="nav no-scrollbar" aria-label="Main">
+      <nav className="nav" aria-label="Main">
         {navItems.map((n) => (
-          <Link key={n.name} href={n.href} aria-current={pathname === n.href ? "page" : undefined}>
+          <Link key={n.name} href={n.href} aria-current={isActive(n.href, pathname) ? "page" : undefined}>
             {n.name}
           </Link>
         ))}
@@ -27,9 +42,9 @@ export default function Header({ solid = false }: { solid?: boolean }) {
         <button type="button" className="icon-btn" aria-label="Search">
           <SearchIcon />
         </button>
-        <button type="button" className="icon-btn" aria-label="Account">
+        <Link href="/account" className="icon-btn" aria-label="Account">
           <AccountIcon />
-        </button>
+        </Link>
         <button
           type="button"
           className="icon-btn"

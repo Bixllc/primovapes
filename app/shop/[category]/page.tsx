@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
-import { categories, navItems, products } from "@/lib/data";
+import { categories, extraShopPages, products } from "@/lib/data";
 
-// Every slug reachable from the nav, the category tiles, or "View all".
-const titles: Record<string, string> = { all: "All products" };
-for (const n of navItems) if (n.href.startsWith("/shop/")) titles[n.href.slice(6)] = n.name;
+// Every slug reachable from the category tiles, footer, promos or "View all".
+const titles: Record<string, string> = { ...extraShopPages };
 for (const c of categories) titles[c.slug] = c.name;
 
 export const dynamicParams = false;
@@ -30,7 +29,7 @@ export default async function ShopPage({ params }: Props) {
 
   return (
     <main>
-      <Header solid />
+      <Header />
       <section className="container page-head">
         <div className="eyebrow">Shop</div>
         <h1 className="h2">{title}</h1>

@@ -3,6 +3,8 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import ProductRail from "@/components/ProductRail";
 import { BagIcon } from "@/components/Icons";
+import { MembersSection } from "@/components/Membership";
+import { StoreAddress, StoreHours } from "@/components/StoreInfo";
 import { categories, perks, products, store } from "@/lib/data";
 
 export default function Home() {
@@ -20,7 +22,7 @@ export default function Home() {
         />
         <div className="hero-shade" />
         <div className="hero-topband" />
-        <Header />
+        <Header overHero />
         <div className="container hero-copy">
           <div className="hero-eyebrow">Premium products. Good vibes.</div>
           <h1>
@@ -126,6 +128,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Membership ── */}
+      <MembersSection />
+
       {/* ── Order online / visit ── */}
       <section id="visit" className="container section" aria-labelledby="visit-title">
         <div className="visit-card">
@@ -149,24 +154,18 @@ export default function Home() {
           <div className="visit-info">
             <div>
               <div className="label">Address</div>
-              <address>
-                {store.addressLine1}
-                <br />
-                {store.addressLine2}
-              </address>
+              <StoreAddress />
             </div>
             <div>
               <div className="label">Hours</div>
-              {store.hoursLine1}
-              <br />
-              {store.hoursLine2}
+              <StoreHours />
             </div>
           </div>
           <div className="visit-actions">
-            <a href={store.directionsUrl} className="pill pill-pink" target="_blank" rel="noopener noreferrer">
+            <a href={store.mapsUrl} className="pill pill-pink" target="_blank" rel="noopener noreferrer">
               Get directions
             </a>
-            <a href={store.phone ? `tel:${store.phone}` : "#"} className="pill pill-outline">
+            <a href={store.phoneHref} className="pill pill-outline">
               Call the shop
             </a>
           </div>

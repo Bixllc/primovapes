@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./pages.css";
 import { CartProvider } from "@/components/CartProvider";
+import { AuthProvider } from "@/components/AuthProvider";
 import CartDrawer from "@/components/CartDrawer";
 import AgeGate from "@/components/AgeGate";
 import { AGE_KEY } from "@/lib/data";
@@ -28,11 +30,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bangers&family=Google+Sans:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
+        <AuthProvider>
         <CartProvider>
           <div className="announce">
             <div className="container announce-inner">
@@ -48,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="announce-right">
                 <a href="#">Track Order</a>
                 <span className="sep">|</span>
-                <a href="#">Contact</a>
+                <a href="/contact">Contact</a>
               </div>
             </div>
           </div>
@@ -57,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CartDrawer />
           <AgeGate />
         </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

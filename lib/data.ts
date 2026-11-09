@@ -43,18 +43,18 @@ export const products: Product[] = [
 export const productById = new Map(products.map((p) => [p.id, p]));
 
 export const navItems: { name: string; href: string }[] = [
-  { name: "Home", href: "/" },
-  { name: "Vapes", href: "/shop/vapes" },
-  { name: "THC", href: "/shop/thc" },
-  { name: "Hookah", href: "/shop/hookah" },
-  { name: "Glass", href: "/shop/glass" },
-  { name: "Roll", href: "/shop/roll" },
-  { name: "Munchies", href: "/shop/munchies" },
-  { name: "Drinks", href: "/shop/drinks" },
-  { name: "Accessories", href: "/shop/accessories" },
-  { name: "Brands", href: "/shop/brands" },
-  { name: "Deals", href: "/shop/deals" },
+  { name: "Shop", href: "/#shop" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
+
+// Extra /shop/<slug> listing pages beyond the six categories (footer links).
+export const extraShopPages: Record<string, string> = {
+  all: "All products",
+  hookah: "Hookah",
+  glass: "Glass",
+  deals: "Deals",
+};
 
 export const perks = [
   { title: "Fast shipping", sub: "Orders $75+" },
@@ -65,12 +65,19 @@ export const perks = [
 ];
 
 export const store = {
-  addressLine1: "Store address",
-  addressLine2: "City, State ZIP",
-  hoursLine1: "Mon–Sun",
-  hoursLine2: "Store hours",
-  phone: "", // e.g. "+15555555555"
-  directionsUrl: "#",
+  address: "323 SW 6th St",
+  cityStateZip: "Fort Lauderdale, FL 33315",
+  phoneDisplay: "954.395.8306",
+  phoneHref: "tel:9543958306",
+  hours: [
+    { days: "Sun–Wed", time: "12PM–11PM" },
+    { days: "Thu–Sat", time: "12PM–2AM" },
+  ],
+  rating: 5.0,
+  reviewCount: 20,
+  mapsUrl: "https://maps.google.com/?q=323+SW+6th+St+Fort+Lauderdale+FL+33315",
+  mapsEmbedUrl:
+    "https://maps.google.com/maps?q=323+SW+6th+St+Fort+Lauderdale+FL+33315&z=15&output=embed",
 };
 
 export const footerCols = [
@@ -90,13 +97,13 @@ export const footerCols = [
       { name: "Track order", href: "#" },
       { name: "Shipping", href: "#" },
       { name: "Returns", href: "#" },
-      { name: "Contact", href: "#" },
+      { name: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Store",
     links: [
-      { name: "Hours & location", href: "/#visit" },
+      { name: "Hours & location", href: "/contact" },
       { name: "Instagram", href: "#" },
       { name: "Age policy", href: "#" },
     ],

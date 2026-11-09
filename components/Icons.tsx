@@ -30,3 +30,23 @@ export const BagIcon = ({ size = 22, color = "currentColor" }: { size?: number; 
     <path d="M9 10V6a3 3 0 0 1 6 0v4" />
   </svg>
 );
+
+export const PhoneIcon = ({ size = 22 }: { size?: number }) => (
+  <svg {...base} width={size} height={size}>
+    <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />
+  </svg>
+);
+
+export const PinIcon = ({ size = 22 }: { size?: number }) => (
+  <svg {...base} width={size} height={size}>
+    <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+    <circle cx="12" cy="9.5" r="2.5" />
+  </svg>
+);
+
+export const ClockIcon = ({ size = 22 }: { size?: number }) => (
+  <svg {...base} width={size} height={size}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+);
