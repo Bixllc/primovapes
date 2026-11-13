@@ -990,6 +990,9 @@
   top: calc(100% - 3px);
   transform: translateX(-50%);
 }
+.founder-portrait {
+  display: none;
+}
 .founders-frame {
   border: 3px solid #0a090b;
   outline: 1px solid var(--line);
@@ -1426,7 +1429,7 @@ a.info-card:hover {
     border-radius: 20px;
     box-shadow: 4px 4px 0 #ff2e93;
   }
-  .bubble:nth-child(even) {
+  .bubble:nth-child(4n + 3) {
     margin-left: auto;
   }
   .bubble-name {
@@ -1444,6 +1447,36 @@ a.info-card:hover {
   .bubble-tail {
     width: 26px;
     height: 23px;
+    left: 22% !important;
+  }
+  .bubble:nth-child(4n + 3) .bubble-tail {
+    left: 78% !important;
+  }
+  .bubbles {
+    row-gap: 0;
+  }
+  /* Cut-out portrait (pink duotone, transparent) centred under the tail:
+     left bubbles point at 22% of a 94% box, right-hand ones (offset 6%) at 78% */
+  .founder-portrait {
+    --w: 170px;
+    display: block;
+    width: var(--w);
+    margin: 14px 0 6px max(0px, calc(94% * 0.22 - var(--w) / 2));
+    /* soften the straight crop edges at the shoulders and bottom */
+    -webkit-mask-image: radial-gradient(ellipse 62% 70% at 50% 34%, #000 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 62% 70% at 50% 34%, #000 62%, transparent 100%);
+  }
+  .founder-portrait:nth-child(4n) {
+    margin-left: min(calc(100% - var(--w)), calc(6% + 94% * 0.78 - var(--w) / 2));
+  }
+  .founder-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* The group shot repeats the portraits above, so skip it on phones */
+  .founders-frame {
+    display: none;
   }
 
   /* Footer: links three across, brand + newsletter full width */

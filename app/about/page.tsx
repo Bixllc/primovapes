@@ -19,6 +19,8 @@ const hasAsset = (file: string) => existsSync(path.join(process.cwd(), "public",
 const founders = [
   {
     name: "Boss C",
+    photo: "/assets/founder-bossc-cutout.png",
+    photoSize: [298, 448],
     role: "Co-owner",
     tail: 84,
     tilt: -1.5,
@@ -26,6 +28,8 @@ const founders = [
   },
   {
     name: "Primo",
+    photo: "/assets/founder-primo-cutout.png",
+    photoSize: [360, 418],
     role: "Founder & co-owner",
     tail: 47,
     tilt: 1,
@@ -33,6 +37,8 @@ const founders = [
   },
   {
     name: "Bo",
+    photo: "/assets/founder-bo-cutout.png",
+    photoSize: [360, 468],
     role: "Co-owner & business partner",
     tail: 12,
     tilt: -1,
@@ -115,7 +121,7 @@ export default function AboutPage() {
           Ask for <span className="glow-pink">Primo.</span>
         </h2>
         <div className="bubbles no-scrollbar">
-          {founders.map((f) => (
+          {founders.flatMap((f) => [
             <article key={f.name} className="bubble" style={{ transform: `rotate(${f.tilt}deg)` }}>
               <h3 className="bubble-name">{f.name}</h3>
               <span className="bubble-role">{f.role}</span>
@@ -124,8 +130,14 @@ export default function AboutPage() {
                 <path d="M2 0 L17 27 L32 0 Z" fill="#fff" />
                 <path d="M2 0 L17 27 L32 0" fill="none" stroke="#0A090B" strokeWidth="3" strokeLinejoin="round" />
               </svg>
-            </article>
-          ))}
+            </article>,
+            // Mobile only: each founder's portrait sits under their own bubble tail
+            foundersReady && (
+              <figure key={`${f.name}-photo`} className="founder-portrait">
+                <Image src={f.photo} alt={`Illustration of ${f.name}`} width={f.photoSize[0]} height={f.photoSize[1]} sizes="180px" />
+              </figure>
+            ),
+          ])}
         </div>
         <div className="founders-frame">
           {foundersReady ? (
