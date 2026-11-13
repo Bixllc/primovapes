@@ -50,3 +50,31 @@ export const ClockIcon = ({ size = 22 }: { size?: number }) => (
     <path d="M12 7v5l3 2" />
   </svg>
 );
+
+export const TruckIcon = () => (
+  <svg {...base}>
+    <path d="M3 6h11v10H3zM14 9h4l3 3v4h-7" />
+    <circle cx="7" cy="17.5" r="1.8" />
+    <circle cx="17" cy="17.5" r="1.8" />
+  </svg>
+);
+
+export const StoreIcon = () => (
+  <svg {...base}>
+    <path d="M4 10v10h16V10M3 10l2-6h14l2 6zM10 20v-5h4v5" />
+  </svg>
+);
+
+export const ShieldIcon = () => (
+  <svg {...base}>
+    <path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z" />
+    <path d="M8.5 12l2.5 2.5 4.5-5" />
+  </svg>
+);
+
+export const TagIcon = () => (
+  <svg {...base}>
+    <path d="M3 12V4h8l10 10-8 8z" />
+    <circle cx="7.5" cy="8.5" r="1.5" />
+  </svg>
+);

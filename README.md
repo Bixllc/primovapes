@@ -23,7 +23,7 @@ npm run typecheck
 | `lib/membership.ts` | Primo rewards tiers, perks and notes |
 | `app/layout.tsx` | Announcement bar, footer, cart drawer, age gate, fonts |
 | `app/globals.css` | Design tokens (dark + `data-theme="light"`) and all styles |
-| `components/` | Header, animated logo, cart provider/drawer, age gate, product card/rail, footer |
+| `components/` | Header, mobile sticky bar, animated logo, cart provider/drawer, age gate, product card/rail, footer |
 | `lib/data.ts` | Products, categories, nav, store info: **edit content here** |
 | `public/assets/` | Images from the design bundle |
 | `docs/design/` | Original design brief and reference HTML |
@@ -35,6 +35,7 @@ npm run typecheck
 - **Contact form:** posts to `/api/contact`, which validates the message and only logs it on the server for now. It needs an email service or database to reach the shop.
 - **About images:** `about-hero-lounge.png` and `founders.png` show a placeholder frame until they're added to `public/assets/`.
 - **Cart and saved items:** React context, persisted to localStorage (`primo-cart`, `primo-liked`).
+- **Mobile (≤900px):** one-row header (logo, nav, icons); a compact sticky copy slides in once it scrolls away. The announcement bar is a looping one-line ticker, the hero photo sits below the copy, and swipe rows run to the screen edges. Rules live in the responsive blocks at the end of `app/globals.css` and `app/pages.css`.
 - Logo animations are disabled under `prefers-reduced-motion`.
 
 ## Still needed from the client

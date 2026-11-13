@@ -7,7 +7,7 @@ import { AccountIcon, BagIcon, SearchIcon } from "./Icons";
 import { useCart } from "./CartProvider";
 import { navItems } from "@/lib/data";
 
-function isActive(href: string, pathname: string) {
+export function isActive(href: string, pathname: string) {
   if (href === "/#shop") return pathname === "/" || pathname.startsWith("/shop");
   return pathname === href;
 }
@@ -39,7 +39,7 @@ export default function Header({ overHero = false }: { overHero?: boolean }) {
         ))}
       </nav>
       <div className="header-actions">
-        <button type="button" className="icon-btn" aria-label="Search">
+        <button type="button" className="icon-btn header-search" aria-label="Search">
           <SearchIcon />
         </button>
         <Link href="/account" className="icon-btn" aria-label="Account">

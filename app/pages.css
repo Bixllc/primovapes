@@ -1232,3 +1232,280 @@ a.info-card:hover {
     grid-template-columns: repeat(3, 78%);
   }
 }
+
+/* ───────── Mobile optimizations ───────── */
+.mobile-bar {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mobile-bar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    padding: 6px 10px 6px 14px;
+    padding-top: calc(6px + env(safe-area-inset-top));
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-110%);
+    transition: transform 0.22s ease;
+  }
+  .mobile-bar[data-show="true"] {
+    transform: none;
+  }
+  .mobile-bar-logo {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 6px;
+  }
+  .mobile-bar .nav {
+    order: 0;
+    flex: 1;
+    flex-basis: auto;
+    flex-wrap: nowrap;
+    margin: 0;
+    gap: 0;
+  }
+  .mobile-bar .nav a {
+    padding: 10px 8px;
+  }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .mobile-bar {
+    transition: none;
+  }
+}
+
+/* 16px+ inputs stop iOS Safari zooming in on focus (incl. landscape phones) */
+@media (max-width: 900px) {
+  .field input,
+  .field textarea,
+  .newsletter input {
+    font-size: 16px;
+  }
+  /* Small text links get a taller tap area without changing their look */
+  .rail-head a,
+  .announce-right a,
+  .text-link,
+  .plain-link {
+    display: inline-block;
+    padding-block: 12px;
+    margin-block: -12px;
+  }
+  .footer-col {
+    gap: 2px;
+  }
+  .footer-col a {
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 640px) {
+
+  /* Products: two per row instead of one card per screen */
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .rail {
+    grid-auto-columns: 44%;
+    gap: 10px;
+  }
+  .card {
+    padding: 8px;
+    gap: 8px;
+  }
+  .card-name {
+    font-size: 14px;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-rating {
+    font-size: 11px;
+    gap: 4px;
+  }
+  .stars {
+    letter-spacing: 0;
+  }
+  .card-price {
+    font-size: 16px;
+  }
+  .add-btn {
+    height: 40px;
+    font-size: 13px;
+  }
+  .heart {
+    top: 4px;
+    right: 4px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  /* Perks: 2×2 cards with an icon each instead of a bordered list */
+  .perks-wrap {
+    padding-top: 20px;
+  }
+  .perks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    border: 0;
+  }
+  .perk {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .perk-ring {
+    display: none;
+  }
+  .perk-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    color: var(--pink);
+    background: color-mix(in srgb, var(--pink) 14%, transparent);
+  }
+  .perk-title {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .perk-sub {
+    font-size: 12px;
+  }
+
+  /* Membership tiers: swipeable row instead of three tall stacked panels */
+  .tier-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    position: relative; /* contains the absolutely positioned sr-only headings */
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -16px;
+    padding: 0 16px 6px;
+    scroll-padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .tier-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .tier-grid > * {
+    scroll-snap-align: start;
+  }
+
+  /* Founder bubbles: snap with the page gutter */
+  .bubbles {
+    scroll-padding: 0 10px;
+  }
+
+  /* Footer: links three across, brand + newsletter full width */
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 12px;
+    padding-top: 36px;
+  }
+  .footer-brand,
+  .footer-grid > .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+  .footer-brand {
+    flex-direction: row;
+    align-items: center;
+  }
+  .newsletter button {
+    height: 40px;
+  }
+
+  /* Cart: bigger tap targets */
+  .qty button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .remove {
+    padding: 6px 0;
+  }
+  .drawer-head,
+  .drawer-body,
+  .drawer-foot {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .drawer-foot {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
+  /* Account dashboard: compact status cards, tabs as a swipeable row */
+  .status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .status-grid > .rewards-card {
+    grid-column: 1 / -1;
+  }
+  .status-grid > .status-card:not(.rewards-card) {
+    padding: 14px;
+  }
+  .status-grid > .status-card:not(.rewards-card) .status-value {
+    font-size: 19px;
+  }
+  .dash-tabs {
+    flex: 1 1 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 6px;
+  }
+  .dash-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .dash-tabs button {
+    flex: none;
+    height: 40px;
+    font-size: 14px;
+  }
+  .dash-tabs button[aria-current="page"] {
+    box-shadow: inset 0 -2px 0 var(--pink);
+  }
+
+  /* Contact: 2×2 info cards, shorter map */
+  .info-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 24px;
+  }
+  .info-card {
+    padding: 14px;
+  }
+  .info-value {
+    font-size: 14px;
+  }
+  /* Hours need a full row so "12PM–11PM" doesn't break mid-time;
+     the order card after it goes full width too so no cell sits empty */
+  .info-cards > .info-card:nth-child(n + 3) {
+    grid-column: 1 / -1;
+  }
+  .map-frame,
+  .map-frame iframe {
+    min-height: 280px;
+  }
+}

@@ -57,12 +57,11 @@ export const extraShopPages: Record<string, string> = {
 };
 
 export const perks = [
-  { title: "Fast shipping", sub: "Orders $75+" },
-  { title: "Local pickup", sub: "Same day" },
-  { title: "Authentic products", sub: "Top brands only" },
-  { title: "Exclusive deals", sub: "Weekly drops" },
-  { title: "Discreet packaging", sub: "Always private" },
-];
+  { title: "Fast shipping", sub: "Orders $75+", icon: "truck" },
+  { title: "Local pickup", sub: "Same day", icon: "store" },
+  { title: "Authentic products", sub: "Top brands only", icon: "shield" },
+  { title: "Exclusive deals", sub: "Weekly drops", icon: "tag" },
+] as const;
 
 export const store = {
   address: "323 SW 6th St",

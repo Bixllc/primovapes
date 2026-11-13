@@ -49,7 +49,7 @@ export default function Footer() {
                 setJoined(true);
               }}
             >
-              <input type="email" name="email" placeholder="Email" aria-label="Email address" required />
+              <input type="email" name="email" placeholder="Email" aria-label="Email address" autoComplete="email" required />
               <button type="submit" className="pill pill-pink">
                 Join
               </button>

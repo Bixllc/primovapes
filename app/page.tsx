@@ -6,6 +6,9 @@ import { BagIcon } from "@/components/Icons";
 import { MembersSection } from "@/components/Membership";
 import { StoreAddress, StoreHours } from "@/components/StoreInfo";
 import { categories, perks, products, store } from "@/lib/data";
+import { ShieldIcon, StoreIcon, TagIcon, TruckIcon } from "@/components/Icons";
+
+const perkIcons = { truck: <TruckIcon />, store: <StoreIcon />, shield: <ShieldIcon />, tag: <TagIcon /> };
 
 export default function Home() {
   return (
@@ -61,6 +64,7 @@ export default function Home() {
           {perks.map((p) => (
             <li key={p.title} className="perk">
               <span className="perk-ring" aria-hidden />
+              <span className="perk-icon">{perkIcons[p.icon]}</span>
               <div>
                 <div className="perk-title">{p.title}</div>
                 <div className="perk-sub">{p.sub}</div>

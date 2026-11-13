@@ -8,6 +8,14 @@ import AgeGate from "@/components/AgeGate";
 import { AGE_KEY } from "@/lib/data";
 import Footer from "@/components/Footer";
 
+const announcements = [
+  "Free shipping on orders $75+",
+  "Same-day local pickup",
+  "100% authentic products",
+  "21+ only",
+];
+import MobileBar from "@/components/MobileBar";
+
 export const metadata: Metadata = {
   title: "Primo Vapes & Exotics — More than a shop, it's a vibe",
   description:
@@ -39,14 +47,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           <div className="announce">
             <div className="container announce-inner">
-              <div className="announce-left">
-                <span>Free shipping on orders $75+</span>
-                <span className="sep">|</span>
-                <span>Same-day local pickup</span>
-                <span className="sep">|</span>
-                <span className="hide-sm">100% authentic products</span>
-                <span className="sep">|</span>
-                <span>21+ only</span>
+              <div className="announce-left marquee">
+                <p className="sr-only">{announcements.join(" · ")}</p>
+                <div className="marquee-track" aria-hidden>
+                  {/* Two identical halves; the track slides by exactly one half, so the loop is seamless */}
+                  {[0, 1].map((half) => (
+                    <div className="marquee-group" key={half}>
+                      {[0, 1, 2].flatMap((rep) =>
+                        announcements.map((text) => (
+                          <span key={`${rep}-${text}`}>
+                            {text}
+                            <span className="sep">✦</span>
+                          </span>
+                        )),
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="announce-right">
                 <a href="#">Track Order</a>
@@ -57,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           {children}
           <Footer />
+          <MobileBar />
           <CartDrawer />
           <AgeGate />
         </CartProvider>
