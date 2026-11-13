@@ -1259,6 +1259,25 @@ a.info-card:hover {
   .mobile-bar[data-show="true"] {
     transform: none;
   }
+
+  /* About hero: copy on dark at the top, lounge photo as a strip below it
+     (same treatment as the homepage hero) */
+  .about-hero {
+    --hero-photo: clamp(200px, 54vw, 360px);
+  }
+  .about-hero > img {
+    top: auto !important;
+    height: var(--hero-photo) !important;
+  }
+  .about-hero > .asset-missing--hero {
+    top: auto;
+    height: var(--hero-photo);
+  }
+  .about-hero-shade {
+    top: auto;
+    height: var(--hero-photo);
+    background: linear-gradient(180deg, #0a090b 0%, rgba(10, 9, 11, 0) 35%, rgba(10, 9, 11, 0) 75%, var(--bg) 100%);
+  }
   .mobile-bar-logo {
     flex: none;
     width: 40px;
@@ -1391,30 +1410,40 @@ a.info-card:hover {
     font-size: 12px;
   }
 
-  /* Membership tiers: swipeable row instead of three tall stacked panels */
-  .tier-grid {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: 82%;
-    position: relative; /* contains the absolutely positioned sr-only headings */
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin: 0 -16px;
-    padding: 0 16px 6px;
-    scroll-padding: 0 16px;
-    scrollbar-width: none;
-  }
-  .tier-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .tier-grid > * {
-    scroll-snap-align: start;
-  }
-
   /* Founder bubbles: snap with the page gutter */
+  /* Founder bubbles: stacked and compact so all three show without swiping */
   .bubbles {
-    scroll-padding: 0 10px;
+    grid-template-columns: none;
+    grid-auto-flow: row;
+    gap: 22px;
+    overflow: visible;
+    padding: 12px 0 30px;
+    margin: 0;
+  }
+  .bubble {
+    width: 94%;
+    padding: 14px 16px 16px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0 #ff2e93;
+  }
+  .bubble:nth-child(even) {
+    margin-left: auto;
+  }
+  .bubble-name {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .bubble-role {
+    font-size: 10px;
+  }
+  .bubble p {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .bubble-tail {
+    width: 26px;
+    height: 23px;
   }
 
   /* Footer: links three across, brand + newsletter full width */
